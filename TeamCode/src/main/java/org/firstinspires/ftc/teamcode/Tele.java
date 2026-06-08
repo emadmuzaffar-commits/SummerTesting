@@ -23,6 +23,6 @@ public class Tele extends OpMode {
     @Override
     public void loop() {
         follower.update();
-        limelight.loop(follower, gamepad1);
+        limelight.trackTag(follower, gamepad1);
     }
 }

@@ -1433,7 +1433,7 @@ class AnalogMinMaxTuner extends OpMode {
     public double[] minVoltages = new double[encoderNames.length];
     public double[] maxVoltages = new double[encoderNames.length];
 
-    public List<LynxModule> lynxModules; //js to improve loop times a bit yk
+    public List<LynxModule> lynxModules; //js to improve trackTag times a bit yk
 
     public void start() {
     }
