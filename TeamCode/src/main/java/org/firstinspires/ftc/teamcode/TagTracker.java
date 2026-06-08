@@ -9,15 +9,15 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Limelight {
+public class TagTracker {
     @Configurable
-    public static class llConfig {
+    public static class tagTrackerConfig {
         public static int pipeline = 0;
         public static double kR = 0.2;
     }
     private final Limelight3A ll;
     private final TelemetryManager telemetryM;
-    public Limelight(HardwareMap hardwareMap) {
+    public TagTracker(HardwareMap hardwareMap) {
         ll = hardwareMap.get(Limelight3A.class, "ll");
         telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
     }
@@ -32,13 +32,13 @@ public class Limelight {
     }
 
     private double getRotation(double tx) {
-        return tx * llConfig.kR;
+        return tx * tagTrackerConfig.kR;
     }
 
     /// Main init method.
-    /// Sets the pipeline to llConfig.pipeline and starts ll.
+    /// Sets the pipeline to tagTrackerConfig.pipeline and starts ll.
     public void init() {
-        ll.pipelineSwitch(llConfig.pipeline);
+        ll.pipelineSwitch(tagTrackerConfig.pipeline);
         ll.start();
     }
 
