@@ -42,7 +42,8 @@ public class Limelight {
         ll.start();
     }
 
-    /// Main loop method
+    /// Main loop method. Sets teleop drive to be x,y controlled by gamepad with rotation to track tag.
+    /// Start teleop drive must be called before this
     public void loop(Follower follower, Gamepad gamepad1) {
         //get the tx from ll
         double tx = getTx();
