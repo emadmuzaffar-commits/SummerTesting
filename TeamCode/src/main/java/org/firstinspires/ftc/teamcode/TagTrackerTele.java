@@ -23,7 +23,7 @@ public class TagTrackerTele extends OpMode {
         tagTracker.trackTag(gamepad1);
     }
 
-    static class TagTracker extends TestingBase {
+    private static class TagTracker extends TestingBase {
         @Configurable
         public static class tagTrackerConfig {
             public static int pipeline = 0;
