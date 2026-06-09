@@ -9,17 +9,15 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class TagTracker {
+public class TagTracker extends LimelightBase{
     @Configurable
     public static class tagTrackerConfig {
         public static int pipeline = 0;
         public static double kR = 0.2;
     }
-    private final Limelight3A ll;
-    private final TelemetryManager telemetryM;
+
     public TagTracker(HardwareMap hardwareMap) {
-        ll = hardwareMap.get(Limelight3A.class, "ll");
-        telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
+        super(hardwareMap);
     }
 
     /// Loop method to detect an AprilTag and return Tx. Prints status to panels telemetry
