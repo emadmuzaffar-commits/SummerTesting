@@ -27,7 +27,7 @@ public class TagTrackerTele extends OpMode {
         @Configurable
         public static class tagTrackerConfig {
             public static int pipeline = 0;
-            public static double kR = 0.2;
+            public static double kR = -0.045;
         }
 
         public TagTracker(HardwareMap hardwareMap) {
@@ -46,6 +46,7 @@ public class TagTrackerTele extends OpMode {
         private double getRotation(double tx) {
             return tx * tagTrackerConfig.kR;
         }
+
 
         /// Main init method.
         /// Sets the pipeline to tagTrackerConfig.pipeline and starts ll.
