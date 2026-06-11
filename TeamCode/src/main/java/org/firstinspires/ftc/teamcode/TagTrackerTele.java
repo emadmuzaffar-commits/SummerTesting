@@ -63,7 +63,7 @@ public class TagTrackerTele extends OpMode {
             //apply rotation multiplier
             double r = getRotation(tx);
             //setTeleopDrive
-            follower.setTeleOpDrive(gamepad1.left_stick_x, gamepad1.left_stick_y, r);
+            follower.setTeleOpDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, r);
         }
 
     }
