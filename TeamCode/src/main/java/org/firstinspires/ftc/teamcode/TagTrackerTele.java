@@ -27,7 +27,7 @@ public class TagTrackerTele extends OpMode {
         @Configurable
         public static class tagTrackerConfig {
             public static int pipeline = 0;
-            public static double kR = -0.045;
+            public static double kR = 0.045;
         }
 
         public TagTracker(HardwareMap hardwareMap) {
@@ -44,7 +44,7 @@ public class TagTrackerTele extends OpMode {
         }
 
         private double getRotation(double tx) {
-            return tx * tagTrackerConfig.kR;
+            return -tx * tagTrackerConfig.kR;
         }
 
 
@@ -63,7 +63,7 @@ public class TagTrackerTele extends OpMode {
             //apply rotation multiplier
             double r = getRotation(tx);
             //setTeleopDrive
-            follower.setTeleOpDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, r);
+            follower.setTeleOpDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x, r);
         }
 
     }
