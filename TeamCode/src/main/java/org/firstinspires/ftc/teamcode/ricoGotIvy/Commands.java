@@ -33,6 +33,13 @@ public class Commands {
     public static final Command transferCommand = Command.build()
             .setStart(() -> transfer.run())
             .setEnd(endCondition -> transfer.stop())
-            .requiring(transfer);
+            .requiring(transfer)
+            .setPriority(1);
+
+    public static final Command transferBackCommand = Command.build()
+            .setStart(() -> transfer.back())
+            .setEnd(endCondition -> transfer.stop())
+            .requiring(transfer)
+            .setPriority(transferCommand.priority() - 1);
 
 }

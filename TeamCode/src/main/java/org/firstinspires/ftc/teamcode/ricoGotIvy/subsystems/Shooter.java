@@ -14,17 +14,13 @@ public class Shooter {
     private Shooter(HardwareMap hardwareMap) {
         s1 = hardwareMap.get(DcMotorEx.class, "s1");
         s2 = hardwareMap.get(DcMotorEx.class, "s2");
+        s1.setDirection(DcMotorEx.Direction.REVERSE);
+        s2.setDirection(DcMotorEx.Direction.FORWARD);
         timer = new ElapsedTime();
     }
     @RunIt(callTime = CallTime.SUBSYSTEM)
     public Shooter shooterWrapped(HardwareMap hardwareMap) {
         return new Shooter(hardwareMap);
-    }
-
-    @RunIt(callTime = CallTime.START)
-    public void init() {
-        s1.setDirection(DcMotorEx.Direction.REVERSE);
-        s2.setDirection(DcMotorEx.Direction.FORWARD);
     }
 
     public void shoot(double power) {

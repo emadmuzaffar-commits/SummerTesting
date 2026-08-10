@@ -9,7 +9,8 @@ public class TestOpMode extends OpMode {
     static {RI.go("org.firstinspires.ftc.teamcode.ricoGotIvy");}
 
     boolean bBoolean = false;
-    boolean xBoolean = false;
+    boolean aBoolean = false;
+    boolean yBoolean = false;
 
     @Override
     public void init() {
@@ -26,11 +27,18 @@ public class TestOpMode extends OpMode {
             bBoolean = false;
         }
 
-        if (gamepad1.x) {
-            xBoolean = true;
+        if (gamepad1.a) {
+            aBoolean = true;
             Commands.transferCommand.schedule();
-        } else if (!gamepad1.x && xBoolean) {
-            xBoolean = false;
+        } else if (!gamepad1.x && aBoolean) {
+            aBoolean = false;
+        }
+
+        if (gamepad1.y) {
+            yBoolean = true;
+            Commands.transferCommand.schedule();
+        } else if (!gamepad1.y && yBoolean) {
+            yBoolean = false;
         }
     }
 }
