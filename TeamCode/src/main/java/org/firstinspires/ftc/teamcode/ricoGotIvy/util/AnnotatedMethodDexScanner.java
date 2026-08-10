@@ -17,7 +17,7 @@ import java.util.List;
 import dalvik.system.DexFile;
 
 final class AnnotatedMethodDexScanner {
-    static String logTag = "Run It AnnotatedMethodDexScanner";
+    static final String logTag = "Run It AnnotatedMethodDexScanner";
     
     private AnnotatedMethodDexScanner() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
@@ -111,7 +111,6 @@ final class AnnotatedMethodDexScanner {
                     if (method.isAnnotationPresent(annotation)) {
                         results.add(method);
                     }
-
                 }
             }
         } catch (ClassNotFoundException | SecurityException | LinkageError exception) {

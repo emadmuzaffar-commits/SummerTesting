@@ -22,34 +22,24 @@ final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     private static final String logTag = "RunItHandler";
 
-    HardwareMap hardwareMap;
-    OpModeManagerImpl manager;
-
-    private static String internalSearchPath;
-    private EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
+    final HardwareMap hardwareMap;
+    final OpModeManagerImpl manager;
+    private final EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
     private Map<Class<?>, Object> classes = null;
 
 
-    private void OpModeManagerDependencyInit() {
-        Activity activity = AppUtil.getInstance().getActivity();
-        manager = OpModeManagerImpl.getOpModeManagerOfActivity(activity);
-        manager.registerListener(this);
-        hardwareMap = manager.getHardwareMap();
-    }
+
 
     RunItHandler(String searchPath) {
-        internalSearchPath = searchPath;
-        OpModeManagerDependencyInit();
+        manager = OpModeManagerHelper.getManagerAndRegister(this);
+        hardwareMap = manager.getHardwareMap();
 
         ArrayList<Method> rawMethods = AnnotatedMethodDexScanner.scanForMethods(
                 hardwareMap,
+                searchPath,
                 RunIt.class
         );
         indexedMethods = IndexMethodSet.indexMethodSet(rawMethods);
-    }
-
-    void setSearchPath(String searchPath) {
-        internalSearchPath = searchPath;
     }
 
     ///Get subsystem
