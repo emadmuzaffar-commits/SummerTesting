@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util;
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt;
 
 enum MethodFlavor {
     INSTANCE_HARDWAREMAP,

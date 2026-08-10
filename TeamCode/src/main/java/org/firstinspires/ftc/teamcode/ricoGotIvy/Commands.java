@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.ricoGotIvy;
 
 import com.pedropathing.ivy.Command;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Transfer;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.CallTime;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RI;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.RI;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.RunIt;
 
 public class Commands {
     static Shooter shooter;

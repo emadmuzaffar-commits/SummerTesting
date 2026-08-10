@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.opModes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.ricoGotIvy.Commands;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RI;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.RI;
 
 public class TestOpMode extends OpMode {
     static {RI.go("org.firstinspires.ftc.teamcode.ricoGotIvy");}
