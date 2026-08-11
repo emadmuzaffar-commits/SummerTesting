@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt;
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerImpl;
@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.internal.system.Assert;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -15,19 +16,23 @@ import java.util.Map;
 import java.util.Objects;
 
 
-final class RunItHandler implements OpModeManagerNotifier.Notifications {
+public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     private static final String logTag = "RunItHandler";
 
-    final HardwareMap hardwareMap;
-    final OpModeManagerImpl manager;
+    private final HardwareMap hardwareMap;
+    private final OpModeManagerImpl manager;
     private final EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
     private Map<Class<?>, Object> classes = null;
+    private static boolean instantiated = false;
 
 
 
-
-    RunItHandler(String searchPath) {
+    public RunItHandler(String searchPath) {
+        if (instantiated) {
+            throw new RuntimeException("RunItHandler has already been instantiated");
+        }
+        instantiated = true;
         manager = OpModeManagerHelper.getManagerAndRegister(this);
         hardwareMap = manager.getHardwareMap();
 
@@ -70,6 +75,7 @@ final class RunItHandler implements OpModeManagerNotifier.Notifications {
     public void onOpModePostStop(OpMode opMode) {
         InvokeMethodSet.invoke(CallTime.STOP, indexedMethods, hardwareMap);
         manager.unregisterListener(this);
+        instantiated = false;
     }
 
 }

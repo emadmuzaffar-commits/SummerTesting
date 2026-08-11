@@ -1,6 +1,8 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt;
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 
 import com.qualcomm.robotcore.util.RobotLog;
+
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

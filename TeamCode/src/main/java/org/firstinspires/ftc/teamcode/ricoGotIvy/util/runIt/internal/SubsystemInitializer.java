@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt;
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;

@@ -4,9 +4,9 @@ import com.pedropathing.ivy.Command;
 
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Transfer;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.CallTime;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.RI;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.RunIt;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 public class Commands {
     static Shooter shooter;

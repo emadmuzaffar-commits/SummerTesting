@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt;
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
