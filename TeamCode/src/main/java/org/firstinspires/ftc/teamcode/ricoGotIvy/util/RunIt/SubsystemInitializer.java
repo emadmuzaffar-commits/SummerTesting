@@ -1,7 +1,12 @@
 package org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt;
 
+import com.pedropathing.follower.Follower;
+import com.pedropathing.ftc.FollowerBuilder;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
+
+import org.firstinspires.ftc.robotcore.external.Const;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -37,6 +42,14 @@ final class SubsystemInitializer {
                 throw new RuntimeException("Failed to initialize method parent subsystem: " +
                         method.getName(), exception);
             }
+        }
+        try {
+            objects.add(Constants.createFollower(hardwareMap));
+        } catch (Exception exception) {
+            RobotLog.ee(logTag, "Failed to initialize PedroPathing follower" +
+                            " !Will likely cause NPE!",
+                    exception);
+            throw new RuntimeException("Failed to initialize PedroPathing follower", exception);
         }
         return objects;
     }
