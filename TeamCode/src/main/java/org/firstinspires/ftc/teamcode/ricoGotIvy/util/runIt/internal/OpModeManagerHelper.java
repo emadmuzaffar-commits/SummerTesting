@@ -7,7 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier;
 
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
-public class OpModeManagerHelper {
+public final class OpModeManagerHelper {
+
+    private OpModeManagerHelper() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
     public static OpModeManagerImpl getManagerAndRegister(OpModeManagerNotifier.Notifications listener) {
         OpModeManagerImpl manager;
         Activity activity = AppUtil.getInstance().getActivity();
