@@ -14,6 +14,10 @@ public class Example2 extends OpMode {
     void setTankDrive(double leftStickX, double rightStickY) {
         double leftPower = leftStickX + rightStickY;
         double rightPower = leftStickX - rightStickY;
+        frontLeft.setPower(leftPower);
+        frontRight.setPower(rightPower);
+        backLeft.setPower(leftPower);
+        backRight.setPower(rightPower);
     }
 
     @Override
