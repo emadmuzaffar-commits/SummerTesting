@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.CallTime;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt.RunIt;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.RunIt;
 
 public class Shooter {
     private final DcMotorEx s1;

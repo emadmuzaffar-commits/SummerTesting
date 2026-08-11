@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.RunIt
+package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt
 
 object RI {
     private var runIt: RunItHandler? = null
