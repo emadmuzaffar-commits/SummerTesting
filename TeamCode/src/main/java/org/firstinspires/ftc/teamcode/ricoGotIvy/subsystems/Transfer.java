@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 public class Transfer {

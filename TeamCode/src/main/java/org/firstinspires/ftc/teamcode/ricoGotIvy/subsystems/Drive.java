@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems;
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
