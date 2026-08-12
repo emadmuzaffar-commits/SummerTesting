@@ -27,8 +27,6 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
     private Map<Class<?>, Object> classes = null;
     private static boolean instantiated = false;
 
-
-
     public RunItHandler(String searchPath) {
         if (instantiated) {
             throw new RuntimeException("RunItHandler has already been instantiated");
@@ -46,7 +44,7 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
     }
 
     ///Get subsystem
-    Object g(Class<?> subsystem) {
+    public Object g(Class<?> subsystem) {
         try {
             Object instance = Objects.requireNonNull(classes.get(subsystem));
             Assert.assertTrue(instance.getClass() == subsystem);
