@@ -25,7 +25,7 @@ public class TagTrackerTele extends OpMode {
 
     private static class TagTracker extends TestingBase {
         @Configurable
-        public static class tagTrackerConfig {
+        public static class TagTrackerConfig {
             public static int pipeline = 0;
             public static double kR = 0.045;
         }
@@ -44,14 +44,14 @@ public class TagTrackerTele extends OpMode {
         }
 
         private double getRotation(double tx) {
-            return -tx * tagTrackerConfig.kR;
+            return -tx * TagTrackerConfig.kR;
         }
 
 
         /// Main init method.
-        /// Sets the pipeline to tagTrackerConfig.pipeline and starts ll.
+        /// Sets the pipeline to TagTrackerConfig.pipeline and starts ll.
         public void init() {
-            ll.pipelineSwitch(tagTrackerConfig.pipeline);
+            ll.pipelineSwitch(TagTrackerConfig.pipeline);
             ll.start();
         }
 
