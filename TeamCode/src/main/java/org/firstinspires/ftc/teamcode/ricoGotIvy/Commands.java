@@ -12,14 +12,10 @@ public class Commands {
     static Shooter shooter;
     static Transfer transfer;
 
-    private Commands() {
+    @RunIt(callTime = Call.INIT)
+    public void CommandInit() {
         shooter = RI.g(Shooter.class);
         transfer = RI.g(Transfer.class);
-    }
-
-    @RunIt(callTime = Call.INIT)
-    public Commands CommandsWrapped() {
-        return new Commands();
     }
 
     public static Command shoot(double target) {

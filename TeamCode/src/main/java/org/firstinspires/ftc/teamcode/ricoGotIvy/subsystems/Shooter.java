@@ -11,16 +11,13 @@ public class Shooter {
     private final DcMotorEx s1;
     private final DcMotorEx s2;
     private final ElapsedTime timer;
+    @RunIt(callTime = Call.SUBSYSTEM)
     private Shooter(HardwareMap hardwareMap) {
         s1 = hardwareMap.get(DcMotorEx.class, "s1");
         s2 = hardwareMap.get(DcMotorEx.class, "s2");
         s1.setDirection(DcMotorEx.Direction.REVERSE);
         s2.setDirection(DcMotorEx.Direction.FORWARD);
         timer = new ElapsedTime();
-    }
-    @RunIt(callTime = Call.SUBSYSTEM)
-    public Shooter shooterWrapped(HardwareMap hardwareMap) {
-        return new Shooter(hardwareMap);
     }
 
     public void shoot(double power) {

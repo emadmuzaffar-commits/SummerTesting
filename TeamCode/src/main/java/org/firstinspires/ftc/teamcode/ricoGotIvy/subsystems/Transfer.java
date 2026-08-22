@@ -8,13 +8,10 @@ import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 public class Transfer {
     final DcMotorEx transfer;
-    private Transfer(HardwareMap hardwareMap) {
-        transfer = hardwareMap.get(DcMotorEx.class, "transfer");
-    }
 
     @RunIt(callTime = Call.SUBSYSTEM)
-    public Transfer transferWrapped(HardwareMap hardwareMap) {
-        return new Transfer(hardwareMap);
+    private Transfer(HardwareMap hardwareMap) {
+        transfer = hardwareMap.get(DcMotorEx.class, "transfer");
     }
 
     public void run() {
