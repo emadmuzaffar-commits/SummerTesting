@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface RunIt {
-    CallTime callTime() default CallTime.INIT;
+    Call callTime() default Call.INIT;
 }

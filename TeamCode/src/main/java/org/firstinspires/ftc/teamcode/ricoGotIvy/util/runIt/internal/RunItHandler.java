@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.internal.system.Assert;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 import java.lang.reflect.Method;
@@ -23,7 +23,7 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     private final HardwareMap hardwareMap;
     private final OpModeManagerImpl manager;
-    private final EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
+    private final EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
     private Map<Class<?>, Object> classes = null;
     private static boolean instantiated = false;
 
@@ -60,19 +60,19 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
     public void onOpModePreInit(OpMode opMode) {
         classes = SubsystemInitializer.initAndCreateMap(
                 hardwareMap,
-                Objects.requireNonNull(indexedMethods.get(CallTime.INIT)).get(MethodFlavor.SUBSYSTEM)
+                Objects.requireNonNull(indexedMethods.get(Call.INIT)).get(MethodFlavor.SUBSYSTEM)
         );
-        InvokeMethodSet.invoke(CallTime.INIT, indexedMethods, hardwareMap);
+        InvokeMethodSet.invoke(Call.INIT, indexedMethods, hardwareMap);
     }
 
     @Override
     public void onOpModePreStart(OpMode opMode) {
-        InvokeMethodSet.invoke(CallTime.START, indexedMethods, hardwareMap);
+        InvokeMethodSet.invoke(Call.START, indexedMethods, hardwareMap);
     }
 
     @Override
     public void onOpModePostStop(OpMode opMode) {
-        InvokeMethodSet.invoke(CallTime.STOP, indexedMethods, hardwareMap);
+        InvokeMethodSet.invoke(Call.STOP, indexedMethods, hardwareMap);
         manager.unregisterListener(this);
         instantiated = false;
     }

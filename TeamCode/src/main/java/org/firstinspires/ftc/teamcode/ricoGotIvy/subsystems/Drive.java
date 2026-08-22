@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems;
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 public class Drive {
     static Follower follower;
-    @RunIt(callTime = CallTime.INIT)
+    @RunIt(callTime = Call.INIT)
     public static void initDrive() {
         follower = RI.g(Follower.class);
         follower.startTeleOpDrive();

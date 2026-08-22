@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -74,12 +74,12 @@ final class InvokeMethodSet {
     }
 
 
-    static void invoke(CallTime callTime,
-                       EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> methods,
+    static void invoke(Call call,
+                       EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> methods,
                        HardwareMap hardwareMap)
     {
         try {
-            internalInvoke(Objects.requireNonNull(methods.get(callTime)), hardwareMap);
+            internalInvoke(Objects.requireNonNull(methods.get(call)), hardwareMap);
         } catch (NullPointerException e) {
             RobotLog.ww(logTag, "invoke failed to get methods", e);
         }

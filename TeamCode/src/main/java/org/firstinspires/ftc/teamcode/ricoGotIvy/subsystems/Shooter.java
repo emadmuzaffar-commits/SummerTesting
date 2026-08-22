@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 public class Shooter {
@@ -18,7 +18,7 @@ public class Shooter {
         s2.setDirection(DcMotorEx.Direction.FORWARD);
         timer = new ElapsedTime();
     }
-    @RunIt(callTime = CallTime.SUBSYSTEM)
+    @RunIt(callTime = Call.SUBSYSTEM)
     public Shooter shooterWrapped(HardwareMap hardwareMap) {
         return new Shooter(hardwareMap);
     }
@@ -33,7 +33,7 @@ public class Shooter {
         return timer.seconds() > 5;
     }
 
-    @RunIt(callTime = CallTime.STOP)
+    @RunIt(callTime = Call.STOP)
     public void stop() {
         s1.setPower(0);
         s2.setPower(0);

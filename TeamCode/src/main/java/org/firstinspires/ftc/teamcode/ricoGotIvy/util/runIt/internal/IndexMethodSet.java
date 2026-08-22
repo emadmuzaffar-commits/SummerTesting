@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal;
 
 import com.qualcomm.robotcore.util.RobotLog;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
 import java.lang.reflect.Method;
@@ -21,16 +21,16 @@ final class IndexMethodSet {
 
 
 
-    private static EnumMap<CallTime, ArrayList<Method>> indexMethodCallTime(ArrayList<Method> methods) {
-        EnumMap<CallTime, ArrayList<Method>> methodListMap = new EnumMap<>(CallTime.class);
-        for (CallTime callTime : CallTime.values()) {
-            methodListMap.put(callTime, new ArrayList<>());
+    private static EnumMap<Call, ArrayList<Method>> indexMethodCallTime(ArrayList<Method> methods) {
+        EnumMap<Call, ArrayList<Method>> methodListMap = new EnumMap<>(Call.class);
+        for (Call call : Call.values()) {
+            methodListMap.put(call, new ArrayList<>());
         }
 
         for (Method method : methods) {
             try {
                 if (method.isAnnotationPresent(RunIt.class)) {
-                    CallTime calltime = Objects.requireNonNull(method.getAnnotation(RunIt.class)).callTime();
+                    Call calltime = Objects.requireNonNull(method.getAnnotation(RunIt.class)).callTime();
                     Objects.requireNonNull(methodListMap.get(calltime)).add(method);
                 }
             } catch (Exception exception) {
@@ -50,7 +50,7 @@ final class IndexMethodSet {
         for (Method method : methods) {
             try {
                 if (method.isAccessible() && Modifier.isPublic(method.getModifiers())) {
-                     if (Objects.requireNonNull(method.getAnnotation(RunIt.class)).callTime() == CallTime.SUBSYSTEM) {
+                     if (Objects.requireNonNull(method.getAnnotation(RunIt.class)).callTime() == Call.SUBSYSTEM) {
                         Objects.requireNonNull(methodListMap.get(MethodFlavor.SUBSYSTEM)).add(method);
                     }
                     if (Modifier.isStatic(method.getModifiers())) {
@@ -75,14 +75,14 @@ final class IndexMethodSet {
         return methodListMap;
     }
 
-    static EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> indexMethodSet(ArrayList<Method> methods) {
-        EnumMap<CallTime, EnumMap<MethodFlavor, ArrayList<Method>>> methodListMap = new EnumMap<>(CallTime.class);
-        EnumMap<CallTime, ArrayList<Method>> callTimeArrayListEnumMap = indexMethodCallTime(methods);
+    static EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> indexMethodSet(ArrayList<Method> methods) {
+        EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> methodListMap = new EnumMap<>(Call.class);
+        EnumMap<Call, ArrayList<Method>> callTimeArrayListEnumMap = indexMethodCallTime(methods);
 
-        for (CallTime callTime : CallTime.values()) {
-            methodListMap.put(callTime, indexMethodFlavor(Objects.requireNonNull(callTimeArrayListEnumMap.get(callTime))));
-            if (callTime == CallTime.INIT) continue;
-            Objects.requireNonNull(Objects.requireNonNull(methodListMap.get(callTime)).get(MethodFlavor.SUBSYSTEM)).clear();
+        for (Call call : Call.values()) {
+            methodListMap.put(call, indexMethodFlavor(Objects.requireNonNull(callTimeArrayListEnumMap.get(call))));
+            if (call == Call.INIT) continue;
+            Objects.requireNonNull(Objects.requireNonNull(methodListMap.get(call)).get(MethodFlavor.SUBSYSTEM)).clear();
         }
 
         return methodListMap;

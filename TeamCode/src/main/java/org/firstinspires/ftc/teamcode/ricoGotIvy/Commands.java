@@ -4,7 +4,7 @@ import com.pedropathing.ivy.Command;
 
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Transfer;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.CallTime;
+import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
@@ -17,7 +17,7 @@ public class Commands {
         transfer = RI.g(Transfer.class);
     }
 
-    @RunIt(callTime = CallTime.INIT)
+    @RunIt(callTime = Call.INIT)
     public Commands CommandsWrapped() {
         return new Commands();
     }
