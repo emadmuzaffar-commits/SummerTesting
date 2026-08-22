@@ -113,6 +113,9 @@ final class AnnotatedMethodDexScanner {
                     }
                 }
             }
+            for (Class<?> innerClass : clazz.getDeclaredClasses()) {
+                inspectClass(innerClass.getName(), annotation, classLoader, results);
+            }
         } catch (ClassNotFoundException | SecurityException | LinkageError exception) {
             RobotLog.aa(logTag, "Error scanning" + className, exception);
         }
