@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.internal.system.Assert;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -23,7 +24,7 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     private final HardwareMap hardwareMap;
     private final OpModeManagerImpl manager;
-    private final EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> indexedMethods;
+    private final EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Executable>>> indexedMethods;
     private Map<Class<?>, Object> classes = null;
     private static boolean instantiated = false;
 

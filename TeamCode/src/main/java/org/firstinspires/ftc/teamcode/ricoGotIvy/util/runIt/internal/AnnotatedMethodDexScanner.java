@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,10 +113,17 @@ final class AnnotatedMethodDexScanner {
                         results.add(method);
                     }
                 }
+                for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+                    if (constructor.isAnnotationPresent(annotation)) {
+                        //results.add(constructor);
+                        // FIXME: 8/22/26
+                    }
+                }
             }
             for (Class<?> innerClass : clazz.getDeclaredClasses()) {
                 inspectClass(innerClass.getName(), annotation, classLoader, results);
             }
+
         } catch (ClassNotFoundException | SecurityException | LinkageError exception) {
             RobotLog.aa(logTag, "Error scanning" + className, exception);
         }

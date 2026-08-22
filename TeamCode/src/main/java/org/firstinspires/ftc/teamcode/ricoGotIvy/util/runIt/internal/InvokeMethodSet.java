@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
 
+import java.lang.reflect.Executable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,47 +21,51 @@ final class InvokeMethodSet {
 
     private static final String logTag = "Run It InvokeMethodSet";
 
-    private static void invokeStaticNoParams(ArrayList<Method> methods) {
-        for (Method method : methods) {
+    private static void invokeStaticNoParams(ArrayList<Executable> methods) {
+        for (Executable executable : methods) {
             try {
-                method.invoke(null);
+                Method method = ExecutableHelper.getMethod(executable);
+method.invoke(null);
             } catch (Exception e) {
-                RobotLog.ww(logTag, "invokeStaticNoParams" + method.getName(), e);
+                RobotLog.ww(logTag, "invokeStaticNoParams" + executable.toString(), e);
             }
         }
     }
 
-    private static void invokeStaticHardwareMap(ArrayList<Method> methods, HardwareMap hardwareMap) {
-        for (Method method : methods) {
+    private static void invokeStaticHardwareMap(ArrayList<Executable> methods, HardwareMap hardwareMap) {
+        for (Executable executable : methods) {
             try {
-                method.invoke(hardwareMap);
+                Method method = ExecutableHelper.getMethod(executable);
+method.invoke(hardwareMap);
             } catch (Exception e) {
-                RobotLog.ww(logTag, "invokeStaticHardwareMap" + method.getName(), e);
+                RobotLog.ww(logTag, "invokeStaticHardwareMap" + executable.toString(), e);
             }
         }
     }
 
-    private static void invokeInstanceNoParams(ArrayList<Method> methods) {
-        for (Method method : methods) {
+    private static void invokeInstanceNoParams(ArrayList<Executable> methods) {
+        for (Executable executable : methods) {
             try {
-                method.invoke(RI.g(method.getDeclaringClass()));
+                Method method = ExecutableHelper.getMethod(executable);
+method.invoke(RI.g(method.getDeclaringClass()));
             } catch (InvocationTargetException | IllegalAccessException e) {
-                RobotLog.ww(logTag, "invokeInstanceNoParams" + method.getName(), e);
+                RobotLog.ww(logTag, "invokeInstanceNoParams" + executable.toString(), e);
             }
         }
     }
 
-    private static void invokeInstanceHardwareMap(ArrayList<Method> methods, HardwareMap hardwareMap) {
-        for (Method method : methods) {
+    private static void invokeInstanceHardwareMap(ArrayList<Executable> methods, HardwareMap hardwareMap) {
+        for (Executable executable : methods) {
             try {
-                method.invoke(RI.g(method.getDeclaringClass()), hardwareMap);
+                Method method = ExecutableHelper.getMethod(executable);
+method.invoke(RI.g(method.getDeclaringClass()), hardwareMap);
             } catch (InvocationTargetException | IllegalAccessException e) {
-                RobotLog.ww(logTag, "invokeInstanceHardwareMap" + method.getName(), e);
+                RobotLog.ww(logTag, "invokeInstanceHardwareMap" + executable.toString(), e);
             }
         }
     }
 
-    private static void internalInvoke(EnumMap<MethodFlavor, ArrayList<Method>> methods,
+    private static void internalInvoke(EnumMap<MethodFlavor, ArrayList<Executable>> methods,
                                        HardwareMap hardwareMap)
     {
         try {
@@ -75,7 +80,7 @@ final class InvokeMethodSet {
 
 
     static void invoke(Call call,
-                       EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> methods,
+                       EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Executable>>> methods,
                        HardwareMap hardwareMap)
     {
         try {

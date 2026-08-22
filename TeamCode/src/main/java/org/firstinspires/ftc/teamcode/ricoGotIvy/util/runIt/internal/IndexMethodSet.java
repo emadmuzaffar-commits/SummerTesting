@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
 import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
 
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -41,8 +42,8 @@ final class IndexMethodSet {
         return methodListMap;
     }
 
-    private static EnumMap<MethodFlavor, ArrayList<Method>> indexMethodFlavor(ArrayList<Method> methods) {
-        EnumMap<MethodFlavor, ArrayList<Method>> methodListMap = new EnumMap<>(MethodFlavor.class);
+    private static EnumMap<MethodFlavor, ArrayList<Executable>> indexMethodFlavor(ArrayList<Method> methods) {
+        EnumMap<MethodFlavor, ArrayList<Executable>> methodListMap = new EnumMap<>(MethodFlavor.class);
         for (MethodFlavor methodFlavor : MethodFlavor.values()) {
             methodListMap.put(methodFlavor, new ArrayList<>());
         }
@@ -75,8 +76,8 @@ final class IndexMethodSet {
         return methodListMap;
     }
 
-    static EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> indexMethodSet(ArrayList<Method> methods) {
-        EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Method>>> methodListMap = new EnumMap<>(Call.class);
+    static EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Executable>>> indexMethodSet(ArrayList<Method> methods) {
+        EnumMap<Call, EnumMap<MethodFlavor, ArrayList<Executable>>> methodListMap = new EnumMap<>(Call.class);
         EnumMap<Call, ArrayList<Method>> callTimeArrayListEnumMap = indexMethodCallTime(methods);
 
         for (Call call : Call.values()) {

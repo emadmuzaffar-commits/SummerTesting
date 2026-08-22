@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,18 +27,19 @@ final class SubsystemInitializer {
         return references;
     }
 
-    private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<Method> methods) {
+    private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<Executable> methods) {
         ArrayList<Object> objects = new ArrayList<>();
-        for (Method method : methods) {
+        for (Executable method : methods) {
             try {
-                objects.add(method.invoke(null, hardwareMap));
+                Constructor<?> constructor = ExecutableHelper.getConstructor(method);
+                objects.add(constructor.newInstance(hardwareMap));
             } catch (Exception exception) {
                 RobotLog.ee(logTag, "Failed to initialize method parent subsystem: " +
-                                method.getName() +
+                                method.toString() +
                                 " !Will likely cause NPE!",
                         exception);
                 throw new RuntimeException("Failed to initialize method parent subsystem: " +
-                        method.getName(), exception);
+                        method.toString(), exception);
             }
         }
         try {
@@ -51,7 +53,7 @@ final class SubsystemInitializer {
         return objects;
     }
 
-    static Map<Class<?>, Object> initAndCreateMap(HardwareMap hardwareMap, ArrayList<Method> methods) {
+    static Map<Class<?>, Object> initAndCreateMap(HardwareMap hardwareMap, ArrayList<Executable> methods) {
         return createMap(initializeMethodParentClasses(hardwareMap, methods));
     }
 
