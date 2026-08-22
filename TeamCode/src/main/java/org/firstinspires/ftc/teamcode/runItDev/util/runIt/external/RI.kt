@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external
+package org.firstinspires.ftc.teamcode.runItDev.util.runIt.external
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.internal.RunItHandler
+import org.firstinspires.ftc.teamcode.runItDev.util.runIt.internal.RunItHandler
 
 object RI {
     private var runIt: RunItHandler? = null

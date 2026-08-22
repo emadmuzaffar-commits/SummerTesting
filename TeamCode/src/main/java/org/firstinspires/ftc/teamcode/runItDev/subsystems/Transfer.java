@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems;
+package org.firstinspires.ftc.teamcode.runItDev.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.Call;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RunIt;
+import org.firstinspires.ftc.teamcode.runItDev.util.runIt.external.Call;
+import org.firstinspires.ftc.teamcode.runItDev.util.runIt.external.RunIt;
 
 public class Transfer {
     final DcMotorEx transfer;

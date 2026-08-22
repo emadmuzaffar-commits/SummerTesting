@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.ricoGotIvy.opModes;
+package org.firstinspires.ftc.teamcode.runItDev;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.ricoGotIvy.Commands;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.subsystems.Drive;
-import org.firstinspires.ftc.teamcode.ricoGotIvy.util.runIt.external.RI;
+import org.firstinspires.ftc.teamcode.runItDev.subsystems.Drive;
+import org.firstinspires.ftc.teamcode.runItDev.util.runIt.external.RI;
 
 public class TestOpMode extends OpMode {
     static {RI.go("org.firstinspires.ftc.teamcode.ricoGotIvy");}
