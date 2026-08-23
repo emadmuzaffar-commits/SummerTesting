@@ -12,7 +12,7 @@ public class Shooter {
     private final DcMotorEx s2;
     private final ElapsedTime timer;
     @RunIt(callTime = Call.SUBSYSTEM)
-    private Shooter(HardwareMap hardwareMap) {
+    public Shooter(HardwareMap hardwareMap) {
         s1 = hardwareMap.get(DcMotorEx.class, "s1");
         s2 = hardwareMap.get(DcMotorEx.class, "s2");
         s1.setDirection(DcMotorEx.Direction.REVERSE);

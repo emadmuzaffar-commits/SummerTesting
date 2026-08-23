@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
+import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +27,11 @@ final class SubsystemInitializer {
         return references;
     }
 
-    private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<Executable> methods) {
+    private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<AccessibleObject> methods) {
         ArrayList<Object> objects = new ArrayList<>();
-        for (Executable method : methods) {
+        for (AccessibleObject method : methods) {
             try {
-                Constructor<?> constructor = ExecutableHelper.getConstructor(method);
+                Constructor<?> constructor = AccessibleObjectHelper.getConstructor(method);
                 objects.add(constructor.newInstance(hardwareMap));
             } catch (Exception exception) {
                 RobotLog.ee(logTag, "Failed to initialize method parent subsystem: " +
@@ -53,7 +53,7 @@ final class SubsystemInitializer {
         return objects;
     }
 
-    static Map<Class<?>, Object> initAndCreateMap(HardwareMap hardwareMap, ArrayList<Executable> methods) {
+    static Map<Class<?>, Object> initAndCreateMap(HardwareMap hardwareMap, ArrayList<AccessibleObject> methods) {
         return createMap(initializeMethodParentClasses(hardwareMap, methods));
     }
 

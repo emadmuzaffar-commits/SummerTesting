@@ -10,7 +10,7 @@ public class Transfer {
     final DcMotorEx transfer;
 
     @RunIt(callTime = Call.SUBSYSTEM)
-    private Transfer(HardwareMap hardwareMap) {
+    public Transfer(HardwareMap hardwareMap) {
         transfer = hardwareMap.get(DcMotorEx.class, "transfer");
     }
 

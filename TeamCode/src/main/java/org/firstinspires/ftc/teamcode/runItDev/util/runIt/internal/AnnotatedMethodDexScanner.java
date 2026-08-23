@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,19 +25,19 @@ final class AnnotatedMethodDexScanner {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    public static ArrayList<Method> scanForMethods(HardwareMap hardwareMap,
+    public static ArrayList<AccessibleObject> scanForMethods(HardwareMap hardwareMap,
                                                    Class<? extends Annotation> annotation)
     {
         return scanForMethods(hardwareMap, "org.firstinspires.ftc.teamcode", annotation);
     }
 
-    public static ArrayList<Method> scanForMethods(
+    public static ArrayList<AccessibleObject> scanForMethods(
             HardwareMap hardwareMap,
             String packagePrefix,
             Class<? extends Annotation> annotation)
     {
 
-        ArrayList<Method> results = new ArrayList<>();
+        ArrayList<AccessibleObject> results = new ArrayList<>();
 
         Context context = hardwareMap.appContext;
         ApplicationInfo appInfo = context.getApplicationInfo();
@@ -68,7 +69,7 @@ final class AnnotatedMethodDexScanner {
             String packagePrefix,
             Class<? extends Annotation> annotation,
             ClassLoader classLoader,
-            ArrayList<Method> results)
+            ArrayList<AccessibleObject> results)
     {
         DexFile dexFile = null;
         try {
@@ -103,21 +104,18 @@ final class AnnotatedMethodDexScanner {
             String className,
             Class<? extends Annotation> annotation,
             ClassLoader classLoader,
-            ArrayList<Method> results)
+            ArrayList<AccessibleObject> results)
     {
         try {
             Class<?> clazz = classLoader.loadClass(className);
-            if (clazz.isAnnotationPresent(annotation)) {
-                for (Method method : clazz.getDeclaredMethods()) {
-                    if (method.isAnnotationPresent(annotation)) {
-                        results.add(method);
-                    }
+            for (Method method : clazz.getDeclaredMethods()) {
+                if (method.isAnnotationPresent(annotation)) {
+                    results.add(method);
                 }
-                for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-                    if (constructor.isAnnotationPresent(annotation)) {
-                        //results.add(constructor);
-                        // FIXME: 8/22/26
-                    }
+            }
+            for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+                if (constructor.isAnnotationPresent(annotation)) {
+                    results.add(constructor);
                 }
             }
             for (Class<?> innerClass : clazz.getDeclaredClasses()) {

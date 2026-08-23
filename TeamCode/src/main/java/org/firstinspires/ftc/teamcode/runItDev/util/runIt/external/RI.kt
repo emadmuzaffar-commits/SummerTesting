@@ -1,13 +1,20 @@
 package org.firstinspires.ftc.teamcode.runItDev.util.runIt.external
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import com.qualcomm.robotcore.util.RobotLog
 import org.firstinspires.ftc.teamcode.runItDev.util.runIt.internal.RunItHandler
 
 object RI {
     private var runIt: RunItHandler? = null
 
     @JvmStatic
-    fun go(searchPaths: String = "org.firstinspires.ftc.teamcode") {
-        runIt = RunItHandler(searchPaths)
+    fun go(searchPaths: String = "org.firstinspires.ftc.teamcode", opMode: Class<out OpMode>) {
+        if (runIt == null) {
+            runIt = RunItHandler(searchPaths, opMode)
+            return
+        } else {
+            runIt!!.registerOpMode(opMode)
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
