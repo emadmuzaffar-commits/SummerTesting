@@ -20,10 +20,12 @@ final class AccessibleObjectHelper {
                 return (Constructor<?>) AccessibleObject;
             } catch (Exception e) {
                 RobotLog.ee(logTag, "Failed to cast: " + AccessibleObject.toString());
-                throw new RuntimeException(e.toString());
+                throw e;
             }
         } else throw new IllegalArgumentException(
-                "An AccessibleObject was not an instance of Constructor<?> and could not be cast"
+                "An AccessibleObject: " +
+                        AccessibleObject.toString() +
+                        "was not an instance of Constructor<?> and could not be cast"
         );
     }
 
@@ -33,10 +35,12 @@ final class AccessibleObjectHelper {
                 return (Method) AccessibleObject;
             } catch (Exception e) {
                 RobotLog.ee(logTag, "Failed to cast: " + AccessibleObject.toString());
-                throw new RuntimeException(e.toString());
+                throw e;
             }
         } else throw new IllegalArgumentException(
-                "An AccessibleObject was not an instance of Method<?> and could not be cast"
+                "An AccessibleObject: " +
+                        AccessibleObject.toString() +
+                        "was not an instance of Method and could not be cast"
         );
     }
 

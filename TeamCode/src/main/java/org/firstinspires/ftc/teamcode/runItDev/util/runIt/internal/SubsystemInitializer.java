@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,25 +31,30 @@ final class SubsystemInitializer {
     private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<AccessibleObject> methods) {
         ArrayList<Object> objects = new ArrayList<>();
         for (AccessibleObject method : methods) {
+            Constructor<?> constructor = AccessibleObjectHelper.getConstructor(method);
             try {
-                Constructor<?> constructor = AccessibleObjectHelper.getConstructor(method);
                 objects.add(constructor.newInstance(hardwareMap));
-            } catch (Exception exception) {
+            } catch (Exception e) {
                 RobotLog.ee(logTag, "Failed to initialize method parent subsystem: " +
                                 method.toString() +
                                 " !Will likely cause NPE!",
-                        exception);
-                throw new RuntimeException("Failed to initialize method parent subsystem: " +
-                        method.toString(), exception);
+                        e);
+                try {
+                    throw e;
+                } catch (IllegalAccessException | InstantiationException |
+                         InvocationTargetException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
+
         }
         try {
             objects.add(Constants.createFollower(hardwareMap));
-        } catch (Exception exception) {
+        } catch (Exception e) {
             RobotLog.ee(logTag, "Failed to initialize PedroPathing follower" +
                             " !Will likely cause NPE!",
-                    exception);
-            throw new RuntimeException("Failed to initialize PedroPathing follower", exception);
+                    e);
+            throw e;
         }
         return objects;
     }
