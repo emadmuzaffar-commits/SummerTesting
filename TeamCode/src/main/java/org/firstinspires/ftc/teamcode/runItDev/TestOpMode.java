@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.runItDev;
 
+import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -16,7 +17,7 @@ public class TestOpMode extends OpMode {
 
     @Override
     public void init() {
-        //RunIt handles pretty much everything
+
     }
 
     @Override
@@ -30,21 +31,24 @@ public class TestOpMode extends OpMode {
         //control logic
         if (gamepad1.b && !bBoolean) {
             bBoolean = true;
-            Commands.shoot(1000).schedule();
+            if (Scheduler.isRunning(Commands.shoot)) Commands.shoot.cancel();
+            else Commands.shoot.schedule();
         } else if (!gamepad1.b && bBoolean) {
             bBoolean = false;
         }
 
         if (gamepad1.a && !aBoolean) {
             aBoolean = true;
-            Commands.transferCommand.schedule();
+            if (Scheduler.isRunning(Commands.transferCommand)) Commands.transferCommand.cancel();
+            else Commands.transferCommand.schedule();
         } else if (!gamepad1.a && aBoolean) {
             aBoolean = false;
         }
 
         if (gamepad1.y && !yBoolean) {
             yBoolean = true;
-            Commands.transferBackCommand.schedule();
+            if (Scheduler.isRunning(Commands.transferBackCommand)) Commands.transferBackCommand.cancel();
+            else Commands.transferBackCommand.schedule();
         } else if (!gamepad1.y && yBoolean) {
             yBoolean = false;
         }

@@ -21,7 +21,7 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     private static final String logTag = "RunItHandler";
 
-    private final HardwareMap hardwareMap;
+    private HardwareMap hardwareMap;
     private final OpModeManagerImpl manager;
     private final EnumMap<Call, EnumMap<MethodFlavor, ArrayList<AccessibleObject>>> indexedMap;
     private Map<Class<?>, Object> classes = null;
@@ -66,6 +66,8 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     @Override
     public void onOpModePreInit(OpMode opMode) {
+        hardwareMap = opMode.hardwareMap;
+
         if (isNotRegisteredOpMode(opMode)) return;
         classes = SubsystemInitializer.initAndCreateMap(
                 hardwareMap,
@@ -76,12 +78,16 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
 
     @Override
     public void onOpModePreStart(OpMode opMode) {
+        hardwareMap = opMode.hardwareMap;
+
         if (isNotRegisteredOpMode(opMode)) return;
         InvokeMethodSet.invoke(Call.START, indexedMap, hardwareMap);
     }
 
     @Override
     public void onOpModePostStop(OpMode opMode) {
+        hardwareMap = opMode.hardwareMap;
+
         if (isNotRegisteredOpMode(opMode)) return;
         InvokeMethodSet.invoke(Call.STOP, indexedMap, hardwareMap);
     }

@@ -18,13 +18,11 @@ public class Commands {
         transfer = RI.g(Transfer.class);
     }
 
-    public static Command shoot(double target) {
-        return Command.build()
-                .setExecute(() -> shooter.shoot(target))
+    public static Command shoot = Command.build()
+                .setStart(() -> shooter.shoot(0.75))
                 .setDone(() -> shooter.checkTimer())
                 .setEnd(endCondition -> shooter.stop())
                 .requiring(shooter);
-    }
 
     public static final Command transferCommand = Command.build()
             .setStart(() -> transfer.run())
