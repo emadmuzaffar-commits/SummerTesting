@@ -5,19 +5,22 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.runItDev.subsystems.Drive;
+import org.firstinspires.ftc.teamcode.runItDev.subsystems.Switch;
 import org.firstinspires.ftc.teamcode.runItDev.util.runIt.external.RI;
 
 @TeleOp
 public class TestOpMode extends OpMode {
     static {RI.go("org.firstinspires.ftc.teamcode.runItDev", TestOpMode.class);}
 
-    boolean bBoolean = false;
+    boolean switchBoolean = false;
     boolean aBoolean = false;
     boolean yBoolean = false;
+    Switch aSwitch;
 
     @Override
     public void init() {
-
+        //runIt handles pretty much everything
+        aSwitch = RI.g(Switch.class); //Example of class retrieval through runIt
     }
 
     @Override
@@ -29,12 +32,12 @@ public class TestOpMode extends OpMode {
         Drive.loop(gamepad1);
 
         //control logic
-        if (gamepad1.b && !bBoolean) {
-            bBoolean = true;
+        if (aSwitch.isPressed() && !switchBoolean) {
+            switchBoolean = true;
             if (Scheduler.isRunning(Commands.shoot)) Commands.shoot.cancel();
             else Commands.shoot.schedule();
-        } else if (!gamepad1.b && bBoolean) {
-            bBoolean = false;
+        } else if (!aSwitch.isPressed() && switchBoolean) {
+            switchBoolean = false;
         }
 
         if (gamepad1.a && !aBoolean) {
