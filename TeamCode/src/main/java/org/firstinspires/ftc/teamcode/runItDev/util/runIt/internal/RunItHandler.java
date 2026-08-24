@@ -55,7 +55,7 @@ public final class RunItHandler implements OpModeManagerNotifier.Notifications {
             Assert.assertTrue(instance.getClass() == subsystem);
             return instance;
         } catch (NullPointerException e) {
-            RobotLog.ww(logTag, "Subsystem not found in reference set");
+            RobotLog.ee(logTag, "Subsystem not found in reference set", e);
             return null;
         }
     }

@@ -24,8 +24,7 @@ object RI {
             return runIt!!.g(subsystem) as T
         } catch (nullPointerException: NullPointerException) {
             throw RuntimeException(
-                "Make sure RI.go was called, RI failed to search reference set",
-                nullPointerException
+                "Make sure RI.go was called, RI failed to search reference set$nullPointerException"
             )
         }
 

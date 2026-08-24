@@ -13,8 +13,8 @@ public class Shooter {
     private final ElapsedTime timer;
     @RunIt(callTime = Call.SUBSYSTEM)
     public Shooter(HardwareMap hardwareMap) {
-        s1 = hardwareMap.get(DcMotorEx.class, "s1");
-        s2 = hardwareMap.get(DcMotorEx.class, "s2");
+        s1 = hardwareMap.get(DcMotorEx.class, "shooter1");
+        s2 = hardwareMap.get(DcMotorEx.class, "shooter2");
         s1.setDirection(DcMotorEx.Direction.REVERSE);
         s2.setDirection(DcMotorEx.Direction.FORWARD);
         timer = new ElapsedTime();

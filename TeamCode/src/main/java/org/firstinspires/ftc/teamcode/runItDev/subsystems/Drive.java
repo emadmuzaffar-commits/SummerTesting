@@ -15,6 +15,7 @@ public class Drive {
         follower.startTeleOpDrive();
     }
     public static void loop(Gamepad gamepad) {
+        follower.update();
         follower.setTeleOpDrive(gamepad.left_stick_x, gamepad.left_stick_y, gamepad.right_stick_x);
     }
 

@@ -23,6 +23,10 @@ public class TestOpMode extends OpMode {
     public void loop() {
         //TODO: write and implement control system v1
 
+        //RunIt automatically offers Follower as a RunIt subsystem
+        //RunIt allows Drive.loop to be static by offering static wrapped access subsystem instances
+        Drive.loop(gamepad1);
+
         //control logic
         if (gamepad1.b && !bBoolean) {
             bBoolean = true;
@@ -44,9 +48,5 @@ public class TestOpMode extends OpMode {
         } else if (!gamepad1.y && yBoolean) {
             yBoolean = false;
         }
-
-        //RunIt automatically offers Follower as a RunIt subsystem
-        //RunIt allows Drive.loop to be static by offering static wrapped access subsystem instances
-        Drive.loop(gamepad1);
     }
 }

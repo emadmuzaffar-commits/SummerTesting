@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,39 +28,39 @@ final class SubsystemInitializer {
         return references;
     }
 
-    private static ArrayList<Object> initializeMethodParentClasses(HardwareMap hardwareMap, ArrayList<AccessibleObject> methods) {
+    private static ArrayList<Object> initializeSubsystems(HardwareMap hardwareMap, ArrayList<AccessibleObject> constructors) {
         ArrayList<Object> objects = new ArrayList<>();
-        for (AccessibleObject method : methods) {
-            Constructor<?> constructor = AccessibleObjectHelper.getConstructor(method);
+
+        for (AccessibleObject accessibleObject : constructors) {
+            Constructor<?> constructor = AccessibleObjectHelper.getConstructor(accessibleObject);
             try {
                 objects.add(constructor.newInstance(hardwareMap));
             } catch (Exception e) {
-                RobotLog.ee(logTag, "Failed to initialize method parent subsystem: " +
-                                method.toString() +
-                                " !Will likely cause NPE!",
+                Throwable cause = e.getCause() != null ? e.getCause() : e;
+                RobotLog.ee(logTag, "Failed to initialize subsystem: " +
+                                accessibleObject.toString() +
+                                cause +
+                                Arrays.toString(e.getStackTrace()),
                         e);
-                try {
-                    throw e;
-                } catch (IllegalAccessException | InstantiationException |
-                         InvocationTargetException ex) {
-                    throw new RuntimeException(ex);
-                }
             }
-
         }
+
         try {
             objects.add(Constants.createFollower(hardwareMap));
         } catch (Exception e) {
-            RobotLog.ee(logTag, "Failed to initialize PedroPathing follower" +
-                            " !Will likely cause NPE!",
+            Throwable cause = e.getCause() != null ? e.getCause() : e;
+            RobotLog.ee(logTag, "Failed to initialize follower: " +
+                            cause +
+                            Arrays.toString(e.getStackTrace()),
                     e);
-            throw e;
         }
+
         return objects;
+
     }
 
     static Map<Class<?>, Object> initAndCreateMap(HardwareMap hardwareMap, ArrayList<AccessibleObject> methods) {
-        return createMap(initializeMethodParentClasses(hardwareMap, methods));
+        return createMap(initializeSubsystems(hardwareMap, methods));
     }
 
 

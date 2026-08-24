@@ -22,7 +22,6 @@ final class IndexMethodSet {
     private static final String logTag = "Run It IndexMethodSet";
 
 
-
     private static EnumMap<Call, ArrayList<AccessibleObject>> indexMethodCallTime(ArrayList<AccessibleObject> methods) {
         EnumMap<Call, ArrayList<AccessibleObject>> methodListMap = new EnumMap<>(Call.class);
         for (Call call : Call.values()) {
@@ -36,7 +35,10 @@ final class IndexMethodSet {
                     Objects.requireNonNull(methodListMap.get(calltime)).add(method);
                 }
             } catch (Exception exception) {
-                RobotLog.ee(logTag, "Failed to index method flavor: " + method.toString(), exception);
+                RobotLog.ww(logTag, "Failed to index method call time: " +
+                        method.toString() +
+                        "Method will not be run",
+                        exception);
             }
         }
 
@@ -76,7 +78,10 @@ final class IndexMethodSet {
                     }
                 }
             } catch (Exception exception) {
-                RobotLog.ee(logTag, "Failed to index method flavor: " + AccessibleObject.toString(), exception);
+                RobotLog.ww(logTag, "Failed to index method flavor: " +
+                        AccessibleObject.toString() +
+                        "Method will not be run",
+                        exception);
             }
         }
 
