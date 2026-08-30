@@ -14,32 +14,32 @@ final class AccessibleObjectHelper {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    static Constructor<?> getConstructor(AccessibleObject AccessibleObject) {
-        if (AccessibleObject instanceof Constructor) {
+    static Constructor<?> getConstructor(AccessibleObject accessibleObject) {
+        if (accessibleObject instanceof Constructor) {
             try {
-                return (Constructor<?>) AccessibleObject;
-            } catch (Exception e) {
-                RobotLog.ee(logTag, "Failed to cast: " + AccessibleObject.toString());
+                return (Constructor<?>) accessibleObject;
+            } catch (ClassCastException e) {
+                RobotLog.ee(logTag, "Failed to cast: " + accessibleObject.toString());
                 throw e;
             }
         } else throw new IllegalArgumentException(
                 "An AccessibleObject: " +
-                        AccessibleObject.toString() +
+                        accessibleObject.toString() +
                         "was not an instance of Constructor<?> and could not be cast"
         );
     }
 
-    static Method getMethod(AccessibleObject AccessibleObject) {
-        if (AccessibleObject instanceof Method) {
+    static Method getMethod(AccessibleObject accessibleObject) {
+        if (accessibleObject instanceof Method) {
             try {
-                return (Method) AccessibleObject;
-            } catch (Exception e) {
-                RobotLog.ee(logTag, "Failed to cast: " + AccessibleObject.toString());
+                return (Method) accessibleObject;
+            } catch (ClassCastException e) {
+                RobotLog.ee(logTag, "Failed to cast: " + accessibleObject.toString());
                 throw e;
             }
         } else throw new IllegalArgumentException(
                 "An AccessibleObject: " +
-                        AccessibleObject.toString() +
+                        accessibleObject.toString() +
                         "was not an instance of Method and could not be cast"
         );
     }

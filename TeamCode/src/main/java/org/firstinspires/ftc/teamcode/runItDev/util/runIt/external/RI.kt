@@ -23,10 +23,10 @@ object RI {
         try {
             return runIt!!.g(subsystem) as T
         } catch (nullPointerException: NullPointerException) {
-            throw RuntimeException(
-                "Make sure RI.go was called, RI failed to search reference set$nullPointerException"
-            )
+            RobotLog.ee("RunIt", "Subsystem not found in reference set", nullPointerException)
+            throw nullPointerException
         }
 
     }
+
 }

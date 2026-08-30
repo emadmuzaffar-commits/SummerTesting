@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ final class SubsystemInitializer {
             Constructor<?> constructor = AccessibleObjectHelper.getConstructor(accessibleObject);
             try {
                 objects.add(constructor.newInstance(hardwareMap));
-            } catch (Exception e) {
+            } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {
                 Throwable cause = e.getCause() != null ? e.getCause() : e;
                 RobotLog.ee(logTag, "Failed to initialize subsystem: " +
                                 accessibleObject.toString() +
@@ -53,6 +54,7 @@ final class SubsystemInitializer {
                             cause +
                             Arrays.toString(e.getStackTrace()),
                     e);
+            throw e;
         }
 
         return objects;

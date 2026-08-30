@@ -88,13 +88,13 @@ final class AnnotatedMethodDexScanner {
 
             }
         } catch (IOException exception) {
-            RobotLog.aa(logTag, "Error with dex file", exception);
+            RobotLog.ww(logTag, "Error with dex file", exception);
         } finally {
             if (dexFile != null) {
                 try {
                     dexFile.close();
                 } catch (IOException exception) {
-                    RobotLog.aa(logTag, "Error closing dex file", exception);
+                    RobotLog.ww(logTag, "Error closing dex file", exception);
                 }
             }
         }
@@ -123,7 +123,7 @@ final class AnnotatedMethodDexScanner {
             }
 
         } catch (ClassNotFoundException | SecurityException | LinkageError exception) {
-            RobotLog.aa(logTag, "Error inspecting class" + className, exception);
+            RobotLog.ww(logTag, "Error inspecting class" + className, exception);
         }
 
     }

@@ -22,10 +22,10 @@ public class Example2 extends OpMode {
 
     @Override
     public void init() {
-        frontLeft = hardwareMap.get(DcMotor.class, "motor");
-        frontRight = hardwareMap.get(DcMotor.class, "motor");
-        backLeft = hardwareMap.get(DcMotor.class, "motor");
-        backRight = hardwareMap.get(DcMotor.class, "motor");
+        frontLeft = hardwareMap.get(DcMotor.class, "3");
+        frontRight = hardwareMap.get(DcMotor.class, "2");
+        backLeft = hardwareMap.get(DcMotor.class, "1");
+        backRight = hardwareMap.get(DcMotor.class, "0");
     }
 
     @Override
