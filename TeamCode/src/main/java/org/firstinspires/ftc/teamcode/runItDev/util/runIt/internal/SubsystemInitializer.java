@@ -33,7 +33,7 @@ final class SubsystemInitializer {
         ArrayList<Object> objects = new ArrayList<>();
 
         for (AccessibleObject accessibleObject : constructors) {
-            Constructor<?> constructor = AccessibleObjectHelper.getConstructor(accessibleObject);
+            Constructor<?> constructor = IndexMethodSet.AccessibleObjectHelper.getConstructor(accessibleObject);
             try {
                 objects.add(constructor.newInstance(hardwareMap));
             } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {

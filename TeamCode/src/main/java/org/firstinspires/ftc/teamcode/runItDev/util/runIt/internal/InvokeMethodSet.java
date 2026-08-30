@@ -24,7 +24,7 @@ final class InvokeMethodSet {
     private static void invokeStaticNoParams(ArrayList<AccessibleObject> methods) {
         for (AccessibleObject AccessibleObject : methods) {
             try {
-                Method method = AccessibleObjectHelper.getMethod(AccessibleObject);
+                Method method = IndexMethodSet.AccessibleObjectHelper.getMethod(AccessibleObject);
                 method.invoke(null);
             } catch (Exception e) {
                 RobotLog.ww(logTag, "invokeStaticNoParams" + AccessibleObject.toString(), e);
@@ -35,7 +35,7 @@ final class InvokeMethodSet {
     private static void invokeStaticHardwareMap(ArrayList<AccessibleObject> methods, HardwareMap hardwareMap) {
         for (AccessibleObject AccessibleObject : methods) {
             try {
-                Method method = AccessibleObjectHelper.getMethod(AccessibleObject);
+                Method method = IndexMethodSet.AccessibleObjectHelper.getMethod(AccessibleObject);
                 method.invoke(null, hardwareMap);
             } catch (Exception e) {
                 RobotLog.ww(logTag, "invokeStaticHardwareMap" + AccessibleObject.toString(), e);
@@ -46,7 +46,7 @@ final class InvokeMethodSet {
     private static void invokeInstanceNoParams(ArrayList<AccessibleObject> methods) {
         for (AccessibleObject AccessibleObject : methods) {
             try {
-                Method method = AccessibleObjectHelper.getMethod(AccessibleObject);
+                Method method = IndexMethodSet.AccessibleObjectHelper.getMethod(AccessibleObject);
                 method.invoke(RI.g(method.getDeclaringClass()));
             } catch (InvocationTargetException | IllegalAccessException e) {
                 RobotLog.ww(logTag, "invokeInstanceNoParams" + AccessibleObject.toString(), e);
@@ -57,7 +57,7 @@ final class InvokeMethodSet {
     private static void invokeInstanceHardwareMap(ArrayList<AccessibleObject> methods, HardwareMap hardwareMap) {
         for (AccessibleObject AccessibleObject : methods) {
             try {
-                Method method = AccessibleObjectHelper.getMethod(AccessibleObject);
+                Method method = IndexMethodSet.AccessibleObjectHelper.getMethod(AccessibleObject);
                 method.invoke(RI.g(method.getDeclaringClass()), hardwareMap);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 RobotLog.ww(logTag, "invokeInstanceHardwareMap" + AccessibleObject.toString(), e);
@@ -65,14 +65,14 @@ final class InvokeMethodSet {
         }
     }
 
-    private static void internalInvoke(EnumMap<MethodFlavor, ArrayList<AccessibleObject>> methods,
+    private static void internalInvoke(EnumMap<IndexMethodSet.MethodFlavor, ArrayList<AccessibleObject>> methods,
                                        HardwareMap hardwareMap)
     {
         try {
-            invokeStaticNoParams(Objects.requireNonNull(methods.get(MethodFlavor.STATIC_NO_PARAMS)));
-            invokeStaticHardwareMap(Objects.requireNonNull(methods.get(MethodFlavor.STATIC_HARDWAREMAP)), hardwareMap);
-            invokeInstanceNoParams(Objects.requireNonNull(methods.get(MethodFlavor.INSTANCE_NO_PARAMS)));
-            invokeInstanceHardwareMap(Objects.requireNonNull(methods.get(MethodFlavor.INSTANCE_HARDWAREMAP)), hardwareMap);
+            invokeStaticNoParams(Objects.requireNonNull(methods.get(IndexMethodSet.MethodFlavor.STATIC_NO_PARAMS)));
+            invokeStaticHardwareMap(Objects.requireNonNull(methods.get(IndexMethodSet.MethodFlavor.STATIC_HARDWAREMAP)), hardwareMap);
+            invokeInstanceNoParams(Objects.requireNonNull(methods.get(IndexMethodSet.MethodFlavor.INSTANCE_NO_PARAMS)));
+            invokeInstanceHardwareMap(Objects.requireNonNull(methods.get(IndexMethodSet.MethodFlavor.INSTANCE_HARDWAREMAP)), hardwareMap);
         } catch (NullPointerException e) {
             RobotLog.ww(logTag, "internalInvoke failed to get methods", e);
         }
@@ -80,7 +80,7 @@ final class InvokeMethodSet {
 
 
     static void invoke(Call call,
-                       EnumMap<Call, EnumMap<MethodFlavor, ArrayList<AccessibleObject>>> methods,
+                       EnumMap<Call, EnumMap<IndexMethodSet.MethodFlavor, ArrayList<AccessibleObject>>> methods,
                        HardwareMap hardwareMap)
     {
         try {
